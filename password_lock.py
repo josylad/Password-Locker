@@ -36,3 +36,12 @@ def generate_password():
 	'''
 	password_gen = Credential.generate_password()
 	return password_gen
+
+
+def create_credential(user_name, site_name, account_name, password):
+	'''
+	Function to create a new credential
+	'''
+	new_credential = Credential(user_name, site_name, account_name, password)
+	return new_credential
+
