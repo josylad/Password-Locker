@@ -10,3 +10,6 @@ class Credential:
 	'''
 	Class to create  account credentials, generate new passwords and save user information
 	'''
+
+	credentials_list =[]
+	user_credentials_list = []
