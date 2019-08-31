@@ -71,3 +71,16 @@ class Credential:
 			if credential.site_name == site_name:
 				return credential
 		return False
+
+	@classmethod
+	def copy_credential(cls,site_name):
+		'''
+		Method that copies a credential to the clipboard.
+		'''
+		try:
+			find_credential = Credential.find_by_site_name(site_name)
+			print(f'Your Password for {site_name} has been copied. You can paste it anywhere now.')
+			return pyperclip.copy(find_credential.password)  
+		except 	AttributeError: 
+			return "Invalid site name" 
+
