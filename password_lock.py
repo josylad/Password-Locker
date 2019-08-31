@@ -7,3 +7,10 @@ from credential_class import Credential #importing credential class
 #Edit at your own risk! 
 
 
+def create_user(fname, lname, password):
+	'''
+	Function to create a new user account
+	'''
+	new_user = User(fname, lname, password)
+	return new_user
+
