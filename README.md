@@ -87,6 +87,8 @@ Link:-> ```https://github.com/josylad/Password-Locker```
 
 -Twitter: [@Josylad](https://twitter.com/josylad/)
 
+-Blog: [Joseph Adediji](https://medium.com/@josylad/)
+
 -Email Address: markupmediang [@] gmail.com
 
 -github-username: Josylad
