@@ -1,4 +1,5 @@
 import pyperclip #importing pyperclip for copying to clipboard
+import time,sys
 from user_class import User #importing user class 
 import random #import random variable generator
 import string  #import string constants
@@ -90,7 +91,11 @@ class Credential:
 		try:
 			find_credential = Credential.find_by_site_name(site_name)
 			print(f'Your Password for {site_name} has been copied. You can paste it anywhere now.')
-			return pyperclip.copy(find_credential.password)  
+			return pyperclip.copy(find_credential.password)
+			time.sleep(10)
+			pyperclip.copy("")
+			print("Password destroyed from clipboard")
+			
 		except 	AttributeError: 
 			return "Invalid site name" 
 
