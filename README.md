@@ -5,8 +5,8 @@
 
 # DESCRIPTION
 
-Password Lock is a terminal run python application. It is an amazing application that will help us manage our passwords and even generate new passwords for us. 
-You can store your account login details and also generate new login details with Password Lock.
+Password Lock is a terminal-based python application. It is an amazing application that will help us manage our passwords and even generate new passwords for us. 
+You can store your existing account login details and also generate new login details with Password Lock.
 
 
 ## User Story
@@ -80,19 +80,22 @@ Link:-> ```https://github.com/josylad/Password-Locker```
 
 - pyperclip
 
+# AUTHOR
 
+* Joseph Adediji 
 
 ## Support and Contact
 ---
 
 -Twitter: [@Josylad](https://twitter.com/josylad/)
 
--Blog: [Joseph Adediji](https://medium.com/@josylad/)
+-Blog: [Joseph on Medium](https://medium.com/@josylad/)
 
 -Email Address: markupmediang [@] gmail.com
 
 -github-username: Josylad
 
 ## License
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details
-Copyright (c) 2019
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+Copyright (c) 2019. Joseph Adediji
