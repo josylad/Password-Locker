@@ -45,12 +45,17 @@ class Credential:
 		Credential.credentials_list.append(self)
   
 	@classmethod
-	def delete_credentials(self):
+	def delete_credentials(cls,site_name):
 		'''
 		Function to save a newly created user credentials
 		'''
-
-		Credential.credentials_list.remove(self)
+		user_credentials_list = []
+		for credential in cls.credentials_list:
+			if credential.site_name == site_name:
+				user_credentials_list.remove(credential)
+		return user_credentials_list
+		
+		# Credential.credentials_list.remove(self)
   
 
 	def generate_password(size=10, char=string.ascii_uppercase+string.ascii_lowercase+string.digits):

@@ -26,8 +26,8 @@ def verify_user(first_name, password):
 	'''
 	Function that verifies the existence of the user before creating credentials
 	'''
-	checking_user = Credential.check_user(first_name, password)
-	return checking_user
+	check_user = Credential.check_user(first_name, password)
+	return check_user
 
 
 def generate_password():
@@ -36,6 +36,12 @@ def generate_password():
 	'''
 	password_gen = Credential.generate_password()
 	return password_gen
+
+def check_existing_site(site_name):
+    '''
+    Function that check if a credential exists with that site_name and return a Boolean
+    '''
+    return Credential.find_by_site_name(site_name)
 
 
 def create_credential(username, site_name, account_name, password):
@@ -51,12 +57,13 @@ def save_credential(credential):
 	Function to save a newly created credential
 	'''
 	Credential.save_credentials(credential)
- 
-def del_credential(credential):
+
+	#Built by Joseph Adediji
+def del_credential(site_name):
     '''
     Function to delete a credential
     '''
-    Credential.delete_credentials(credential)
+    return Credential.delete_credentials(site_name)
 
 def display_credentials(username):
 	'''
@@ -64,6 +71,11 @@ def display_credentials(username):
 	'''
 	return Credential.display_credentials(username)
 
+def find_credential(site_name):
+    '''
+    Function that finds a contact by number and returns the contact
+    '''
+    return Credential.find_by_site_name(site_name)
 
 def copy_credential(site_name):
 	'''
@@ -116,7 +128,7 @@ def main():
 
 					while True:
 						print("-"*30)
-						print('Our short codes: \n cc-Create a Credential \n dc-Display Credentials  \n rc-Delete Credentials  \n copy-Copy Password \n ex-Exit')
+						print('Our short codes: \n cc-Create a Credential \n sc-Show Credentials \n fc- Find a Credential  \n copy-Copy Password \n ex-Exit')
 						print('\n')
 						short_code = input('Enter a choice: ').lower().strip()
 						print("-"*10)
@@ -156,31 +168,49 @@ def main():
 							print('\n')
 							print(f'Credential Created: Site Name: {site_name} - Account Name: {account_name} - Password: {password}')
 							print('\n')
+						
+							#Built by Joseph Adediji
+       
+						elif short_code == 'fc':
+							print("Enter the site name you want to search for:")
+       
+							site_name = input()
+							if check_existing_site(site_name):
+									credential = find_credential(site_name)
+									print(f"Here is the Credentials for {credential.site_name} ")
+									print('\n')
+									print(f'Site Name: {credential.site_name} - Account Name: {credential.account_name} - Password: {credential.password}')
+									print('\n')
+									print('-' * 20)
+         
+							else:
+									print('\n')
+									print("That credential does not exist")
        
 						elif short_code == 'rc':
 							print('\n')
-							print("Enter the site name you want to remove")
+							print("Enter the site name of the credentials you want to remove")
 							print('\n')
        
-							credential = input('Enter the site name- ').strip()
-							del_credential(credential)
+							site_name = input('Enter the site name- ').strip()
+							# del_credential(credential)
 
-							# if del_credential(site_name):
-							# 		search_credential = del_credential(credential)
-							# 		print("Here is a list of all deleted credentials")
-							# 		print('\n')
+							if del_credential(site_name):
+									# credential = del_credential(credential)
+									print("Here is a list of all deleted credentials")
+									print('\n')
 
-							# 		for credential in del_credential(credential):
-							# 				print(f"{credential.first_name}")
+									for credential in del_credential(site_name):
+											print(f"{credential.site_name}")
 
-							# 		print('\n')
+									print('\n')
 
-							# else:
-							# 		print('\n')
-							# 		print("That contact does not exist")
-							# 		print('\n')
+							else:
+									print('\n')
+									print("That credential does not exist")
+									print('\n')
 
-						elif short_code == 'dc':
+						elif short_code == 'sc':
 							print('\n')
 							if display_credentials(username):
 								print('Here is a list of all your credentials')
