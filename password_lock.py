@@ -4,7 +4,7 @@ from user_class import User  #imporing user class
 from credential_class import Credential #importing credential class
 
 #Built by Joseph Adediji  
-#Edit at your own risk! 
+ 
 
 
 def create_user(fname, lname, password):
@@ -38,11 +38,11 @@ def generate_password():
 	return password_gen
 
 
-def create_credential(user_name, site_name, account_name, password):
+def create_credential(username, site_name, account_name, password):
 	'''
 	Function to create a new credential
 	'''
-	new_credential = Credential(user_name, site_name, account_name, password)
+	new_credential = Credential(username, site_name, account_name, password)
 	return new_credential
 
 
@@ -51,13 +51,18 @@ def save_credential(credential):
 	Function to save a newly created credential
 	'''
 	Credential.save_credentials(credential)
+ 
+def del_credential(credential):
+    '''
+    Function to delete a credential
+    '''
+    Credential.delete_credentials(credential)
 
-
-def display_credentials(user_name):
+def display_credentials(username):
 	'''
 	Function to display saved credentials
 	'''
-	return Credential.display_credentials(user_name)
+	return Credential.display_credentials(username)
 
 
 def copy_credential(site_name):
@@ -101,24 +106,24 @@ def main():
 				print('Enter your account details to login:')
 				print('\n')
 
-				user_name = input('Enter your first name - ').strip()
+				username = input('Enter your first name - ').strip()
 				password = str(input('Enter your password - '))
-				user_exists = verify_user(user_name,password)
-				if user_exists == user_name:
+				user_exists = verify_user(username,password)
+				if user_exists == username:
 					print('\n')
-					print(f'Welcome {user_name}. Please select a short code to continue.')
+					print(f'Welcome {username}. Please select a short code to continue.')
 					print(' ')
 
 					while True:
 						print("-"*30)
-						print('Our short codes: \n cc-Create a Credential \n dc-Display Credentials \n copy-Copy Password \n ex-Exit')
+						print('Our short codes: \n cc-Create a Credential \n dc-Display Credentials  \n rc-Delete Credentials  \n copy-Copy Password \n ex-Exit')
 						print('\n')
 						short_code = input('Enter a choice: ').lower().strip()
 						print("-"*10)
 
 						if short_code == 'ex':
 							print(" ")
-							print(f'Thank you for using Password Lock. Goodbye {user_name}')
+							print(f'Thank you for using Password Lock. Goodbye {username}')
 							break
 
 						elif short_code == 'cc':
@@ -147,17 +152,40 @@ def main():
 								else:
 									print('Wrong option entered. Try again!')
 
-							save_credential(create_credential(user_name,site_name,account_name,password))
+							save_credential(create_credential(username,site_name,account_name,password))
 							print('\n')
 							print(f'Credential Created: Site Name: {site_name} - Account Name: {account_name} - Password: {password}')
 							print('\n')
+       
+						elif short_code == 'rc':
+							print('\n')
+							print("Enter the site name you want to remove")
+							print('\n')
+       
+							credential = input('Enter the site name- ').strip()
+							del_credential(credential)
+
+							# if del_credential(site_name):
+							# 		search_credential = del_credential(credential)
+							# 		print("Here is a list of all deleted credentials")
+							# 		print('\n')
+
+							# 		for credential in del_credential(credential):
+							# 				print(f"{credential.first_name}")
+
+							# 		print('\n')
+
+							# else:
+							# 		print('\n')
+							# 		print("That contact does not exist")
+							# 		print('\n')
 
 						elif short_code == 'dc':
 							print('\n')
-							if display_credentials(user_name):
+							if display_credentials(username):
 								print('Here is a list of all your credentials')
 								print("  ")
-								for credential in display_credentials(user_name):
+								for credential in display_credentials(username):
 									print(f'Site Name: {credential.site_name} - Account Name: {credential.account_name} - Password: {credential.password}')
 								print('\n')
 							else:
