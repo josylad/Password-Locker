@@ -91,7 +91,39 @@ class TestCredentials(unittest.TestCase):
             '''
             Credential.credentials_list = []
             
-   
+    def test_find_by_site_name(self):
+        '''
+		Test to check if we can find a credential by site_name
+		'''
+        self.new_credential.save_credentials()
+        test_fb = Credential('Joseph','facebook','josylad','123456')
+        test_fb.save_credentials()
+        
+        credential_exists = Credential.find_by_site_name('facebook')
+        self.assertEqual(credential_exists,test_fb)
+        
+    def test_display_credentials(self):
+        '''
+        method that returns a list of all credentials saved
+        '''
+        self.new_credential.save_credentials()
+        test_fb = Credential('Joseph','facebook','josylad','123456')
+        test_fb.save_credentials()
+        
+        self.assertEqual(Credential.display_credentials(User),Credential.user_credentials_list)
+        
+    def test_copy_credential(self):
+        '''
+		Test to confirm if we can copy a credential from saved credentials
+		'''
+        self.new_credential.save_credentials()
+        test_fb = Credential('Joseph','facebook','josylad','123456')
+        test_fb.save_credentials() 
+        Credential.copy_credential('123456')
+        
+        self.assertEqual(self.new_credential.password,pyperclip.paste())
+        print(pyperclip.paste())
+  
         
 if __name__ == '__main__':
     unittest.main()
