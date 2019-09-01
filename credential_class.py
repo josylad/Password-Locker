@@ -4,7 +4,7 @@ import random #import random variable generator
 import string  #import string constants
 
 #Built by Joseph Adediji 
-#Edit at your own risk! 
+
 
 class Credential:
 	'''
@@ -13,6 +13,16 @@ class Credential:
 
 	credentials_list =[]
 	user_credentials_list = []
+
+	def __init__(self,username,site_name,account_name,password):
+		'''
+		Method to define the properties for each user object.
+		'''
+
+		self.username = username
+		self.site_name = site_name
+		self.account_name = account_name
+		self.password = password
 
 	@classmethod
 	def check_user(cls,first_name,password):
@@ -25,22 +35,22 @@ class Credential:
 				current_user = user.first_name
 		return current_user
 
-	def __init__(self,user_name,site_name,account_name,password):
-		'''
-		Method to define the properties for each user object.
-		'''
-
-		self.user_name = user_name
-		self.site_name = site_name
-		self.account_name = account_name
-		self.password = password
-
+	
 	def save_credentials(self):
 		'''
 		Function to save a newly created user credentials
 		'''
 
 		Credential.credentials_list.append(self)
+  
+	@classmethod
+	def delete_credentials(self):
+		'''
+		Function to save a newly created user credentials
+		'''
+
+		Credential.credentials_list.remove(self)
+  
 
 	def generate_password(size=10, char=string.ascii_uppercase+string.ascii_lowercase+string.digits):
 		'''
@@ -50,13 +60,13 @@ class Credential:
 		return password_gen
 
 	@classmethod
-	def display_credentials(cls,user_name):
+	def display_credentials(cls,username):
 		'''
 		Method to display the list of credentials saved.
 		'''
 		user_credentials_list = []
 		for credential in cls.credentials_list:
-			if credential.user_name == user_name:
+			if credential.username == username:
 				user_credentials_list.append(credential)
 		return user_credentials_list
 
