@@ -55,3 +55,17 @@ class TestCredentials(unittest.TestCase):
 		Setup method to run before each test case
 		'''
         self.new_credential = Credential('Joseph','FB.com','Josylad','123456')
+
+    def test__init__(self):
+        '''
+		Test to if check the initialization/creation of credential instances is properly done
+		'''
+        self.assertEqual(self.new_credential.username,'Joseph')
+        self.assertEqual(self.new_credential.site_name,'FB.com')
+        self.assertEqual(self.new_credential.account_name,'Josylad')
+        self.assertEqual(self.new_credential.password,'123456')
+        
+ 
+        
+if __name__ == '__main__':
+    unittest.main()
