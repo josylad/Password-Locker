@@ -1,10 +1,18 @@
 #!/usr/bin/env python3.6
 import pyperclip  #importing pyperclip for copying to clipboard
+# import pyfiglet
 from user_class import User  #imporing user class
 from credential_class import Credential #importing credential class
 
 #Built by Joseph Adediji  
- 
+# banner = cprint(pyfiglet.figlet_format('.    Password Lock    .'), 'yellow')
+# welcome = f"""
+# ***********************************************************
+# *                                                         *
+# *           Welcome to Joseph's Password Lock:            *
+# *                                                         *
+# ***********************************************************
+# \n 
 
 
 def create_user(fname, lname, password):
@@ -63,7 +71,7 @@ def del_credential(site_name):
     '''
     Function to delete a credential
     '''
-    return Credential.delete_credentials(site_name)
+    Credential.delete_credentials()
 
 def display_credentials(username):
 	'''
@@ -86,7 +94,7 @@ def copy_credential(site_name):
 
 def main():
 	print(' ')
-	print('Hello! Welcome to Password Keeper.')
+	print('Hello! Welcome to Password Lock.')
 	while True:
 			print("-"*30)
 			print('\n')
@@ -195,15 +203,13 @@ def main():
 							site_name = input('Enter the site name- ').strip()
 							# del_credential(credential)
 
-							if del_credential(site_name):
+							if find_credential(site_name):
+									credential = find_credential(site_name)
+									credential.delete_credentials()
 									# credential = del_credential(credential)
 									print("Here is a list of all deleted credentials")
 									print('\n')
 
-									for credential in del_credential(site_name):
-											print(f"{credential.site_name}")
-
-									print('\n')
 
 							else:
 									print('\n')
